@@ -1,0 +1,80 @@
+{% load static %}
+<html>
+<head>
+{% if user.is_authenticated %}
+<title>Welcome</title>
+{% else %}
+<title>Login Now</title>
+
+{% endif %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- //web font -->
+</head>
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+	{% if user.is_authenticated %}
+
+		<h1>Welcome</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+
+		<p>Hello. {{ user.username }} <p>
+		Email id - {{ user.email }}	
+
+			<br>
+			<br>
+			<p><a href="\logout"> Logout </a></p>
+
+			</div>
+		</div>
+
+	{% else %}
+
+		<h1>Login now</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form method="POST">
+					{% csrf_token %}
+
+					{{ loginform.Username }}
+					<br>
+
+					{{ loginform.Password }}
+
+					<input type="submit" value="Login">
+
+				</form>
+				<p>Dont have an Account? <a href="/"> Signup Now!</a></p>
+
+			</div>
+		</div>
+		{% endif %}
+		{% for message in messages %}
+		<script> alert('{{ message }}');
+		</script>
+		{% endfor %}
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<!-- //main -->
+</body>
+</html>
